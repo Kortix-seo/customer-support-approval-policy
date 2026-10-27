@@ -87,6 +87,19 @@ your own fixture. `--json` prints the resolved rules beside each decision.
 - Connector-level `policies:` blocks are not parsed. This manifest keeps every
   rule project-wide, which is also how it reads best in review.
 
+## Where the argument is worked through
+
+The policy is short because the reasoning sits elsewhere. If the question is where
+a support agent should stop, [approve before send](https://aicustomerserviceagentguide.com/approve-before-send)
+lays out the calls that need a person and what the thread looks like while one waits.
+For a team that will not run this on a vendor's cloud, [self-hosted support agent](https://aicustomerserviceagentguide.com/self-hosted-support-agent)
+covers what self-hosting changes about the boundary. If the decision is still whether
+the work belongs to an agent or a chatbot, [chatbot vs AI agent in support](https://aicustomerserviceagentguide.com/ai-agent-vs-chatbot-for-support)
+separates the two by what each may change. Worked threads with the calls behind each
+handoff are in [customer service agent examples](https://aicustomerserviceagentguide.com/customer-service-agent-examples).
+And [AI customer service agent pricing](https://aicustomerserviceagentguide.com/ai-customer-service-agent-pricing)
+puts the per-outcome and per-seat prices beside the cost of running the agent yourself.
+
 ## Where the pieces come from
 
 - The keys, the rule order and `approvals.ttl`: the manifest reference at
