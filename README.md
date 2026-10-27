@@ -93,6 +93,8 @@ your own fixture. `--json` prints the resolved rules beside each decision.
   https://kortix.com/docs/project/manifest
 - How a held call appears in a session (`202`, `pending_approval`, an approval
   URL), and what an approval covers: https://kortix.com/docs/connect/connectors
+- The argument this policy makes, worked through the ten-call queue and the two
+  refund rules: https://kortix.com/blog/what-a-support-agent-may-do
 - The support setup this policy is written for — Plain, the codebase and
   Stripe, one sandbox per thread: https://kortix.com/use-cases/customer-support
 - The help-desk connector URL is a placeholder. Replace it with your help desk's
