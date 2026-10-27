@@ -1,0 +1,88 @@
+# yaml-language-server: $schema=https://kortix.com/schema/kortix.v2.schema.json
+kortix_version: 2
+default_agent: support
+
+# A customer support project. Kortix is the open-source AI Operating System
+# that runs this agent; this file is the part a reviewer reads.
+#
+# Three systems a support thread can touch: the help desk (threads), the
+# codebase (bug reports), and Stripe (billing). Read access is broad on
+# purpose: investigation is the work. Write access is one rule per call.
+connectors:
+  # The help desk. Plain is the one Kortix runs its own support on; replace
+  # the URL with your help desk's MCP server. Kortix calls it with the
+  # project's credential, never with a token inside the sandbox.
+  - slug: helpdesk
+    name: Help desk
+    provider: mcp
+    url: https://mcp.example.com/helpdesk/mcp
+
+  # The codebase. Composio's managed GitHub app; read-only in practice,
+  # because the only rules below that reach it are github.* reads.
+  - slug: github
+    name: GitHub
+    provider: composio
+    app: github
+
+  # Billing. Stripe's own published OpenAPI document.
+  - slug: stripe
+    name: Stripe
+    provider: openapi
+    spec: https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json
+
+agents:
+  support:
+    file: agents/support.md
+    connectors: [helpdesk, github, stripe]
+    secrets: none
+    kortix_permissions: none
+
+# Anything no rule matched: reads run, writes and destructive calls wait.
+policy:
+  default_mode: risk
+
+# A held call waits this long for a person before it expires.
+approvals:
+  ttl: 4h
+
+# Project-wide rules. First match wins, and this list runs before any
+# connector-level rule.
+policies:
+  # A duplicate charge is arithmetic: the invoice was submitted twice, the
+  # second charge is provable, and the refund is the correction. It runs.
+  - match: "stripe.create_refund"
+    action: always_run
+    conditions:
+      - arg: reason
+        match: "duplicate"
+
+  # Every other refund is a judgment about the customer relationship, which
+  # is the one thing an agent should not price. It waits for a person.
+  - match: "stripe.create_refund"
+    action: require_approval
+
+  # Plan changes move a customer's money every month from now on.
+  - match: "stripe.update_subscription"
+    action: require_approval
+
+  # A reply in the thread is the visible, correctable part of the work: the
+  # customer can answer it and a person can step in on the same thread.
+  - match: "helpdesk.reply_to_thread"
+    action: always_run
+
+  - match: "helpdesk.add_note"
+    action: always_run
+
+  # Investigation never leaves the building.
+  - match: "github.*"
+    action: always_run
+
+  - match: "stripe.get_*"
+    action: always_run
+
+  - match: "stripe.list_*"
+    action: always_run
+
+  # Nothing deletes a customer record, a charge or a thread.
+  - match: "*.delete_*"
+    action: block
