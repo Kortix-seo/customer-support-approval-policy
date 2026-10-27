@@ -1,0 +1,12 @@
+[
+  {"tool": "github.search_code", "args": {"q": "checkout retry idempotency"}},
+  {"tool": "stripe.list_invoices", "args": {"customer": "cus_9f2"}},
+  {"tool": "stripe.get_charge", "args": {"charge": "ch_3Pf"}},
+  {"tool": "helpdesk.reply_to_thread", "args": {"thread": "th_8812"}},
+  {"tool": "helpdesk.add_note", "args": {"thread": "th_8812"}},
+  {"tool": "stripe.create_refund", "args": {"charge": "ch_3Pf", "amount": 4900, "reason": "duplicate"}},
+  {"tool": "stripe.create_refund", "args": {"charge": "ch_3Pg", "amount": 15000, "reason": "requested_by_customer"}},
+  {"tool": "stripe.update_subscription", "args": {"subscription": "sub_71", "items": []}},
+  {"tool": "helpdesk.escalate_to_engineer", "args": {"thread": "th_8812"}},
+  {"tool": "stripe.delete_customer", "args": {"customer": "cus_9f2"}}
+]
