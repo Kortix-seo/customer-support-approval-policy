@@ -1,6 +1,6 @@
 # Support agent approval policy
 
-Kortix is the open-source AI Operating System, and this repository is a working
+Kortix is the open-source CompanyOS, and this repository is a working
 approval policy for a customer support agent that reads everything and writes
 almost nothing. It is the file pair a reviewer asks for in a support-agent
 review: the `kortix.yaml` that governs the calls, and a small script that prints
@@ -86,6 +86,11 @@ your own fixture. `--json` prints the resolved rules beside each decision.
   threshold needs its own rule, not a glob.
 - Connector-level `policies:` blocks are not parsed. This manifest keeps every
   rule project-wide, which is also how it reads best in review.
+
+An open-source desk arrives as a separate install, on its own license, with its
+own rules about what it may change, and [the two layers of an open-source
+support stack](https://aicustomerserviceagentguide.com/open-source-ai-customer-service-agent)
+lays out where the line between desk and agent falls.
 
 ## Where the argument is worked through
 
