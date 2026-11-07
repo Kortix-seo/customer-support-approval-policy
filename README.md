@@ -104,6 +104,9 @@ separates the two by what each may change. Worked threads with the calls behind 
 handoff are in [customer service agent examples](https://aicustomerserviceagentguide.com/customer-service-agent-examples).
 And [AI customer service agent pricing](https://aicustomerserviceagentguide.com/ai-customer-service-agent-pricing)
 puts the per-outcome and per-seat prices beside the cost of running the agent yourself.
+When the policy has to survive a procurement review rather than a single thread,
+[enterprise AI customer service agents](https://aicustomerserviceagentguide.com/enterprise-ai-customer-service-agents)
+covers the audit trail, the data boundary and the approvals a security team asks for.
 
 ## Where the pieces come from
 
